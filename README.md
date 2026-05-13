@@ -56,14 +56,12 @@ pnpm package    # 打包 NSIS 安装器
 
 ---
 
-## Star 历史
+## Star History
 
-<div align="center">
 <a href="https://www.star-history.com/?repos=Shiqi-SQ%2FHiliu-Community&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Shiqi-SQ/Hiliu-Community&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Shiqi-SQ/Hiliu-Community&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Shiqi-SQ/Hiliu-Community&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Shiqi-SQ/Hiliu-Community&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Shiqi-SQ/Hiliu-Community&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Shiqi-SQ/Hiliu-Community&type=date&legend=top-left" />
  </picture>
 </a>
-</div>
