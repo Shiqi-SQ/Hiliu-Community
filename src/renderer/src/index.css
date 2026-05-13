@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * 「素材集市康康体」——气泡里小刘说话的字体，圆润手写体，配合 rough.js 的手绘气泡更协调。
+ * 字体文件放在 src/renderer/src/assets/fonts/，vite 处理相对 url 时会自动打包到 renderer 产物。
+ * 仅在气泡内通过 font-kangkang 工具类调用，不污染全局 sans。
+ */
+@font-face {
+  font-family: 'KangKang';
+  src: url('./assets/fonts/kangkang.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * 颜色 token 用 RGB triple 写法，配合 tailwind.config.js 里的 rgb(var(--xxx) / <alpha-value>)
+ * 让 bg-zhihu-card/95、bg-zhihu-blue/20 这种 alpha 修饰符照常工作。
+ * 暗色主题只覆盖具体值，不改变量名 → Tailwind 类无需任何 dark: 前缀就跟着切换。
+ */
+:root {
+  color-scheme: light;
+  --zhihu-blue: 0 132 255;
+  --zhihu-blue-hover: 0 115 224;
+  --zhihu-blue-active: 0 102 199;
+  --zhihu-blue-light: 236 245 255;
+  --zhihu-blue-soft: 225 240 255;
+  --zhihu-ink: 26 26 26;
+  --zhihu-gray: 133 144 166;
+  --zhihu-gray-2: 100 100 100;
+  --zhihu-gray-3: 153 153 153;
+  --zhihu-border: 235 235 235;
+  --zhihu-border-light: 240 242 245;
+  --zhihu-bg: 246 246 246;
+  --zhihu-bg-soft: 250 250 250;
+  --zhihu-card: 255 255 255;
+  --zhihu-page: 255 255 255;
+  --body-bg: transparent;
+  --body-text: 26 26 26;
+}
+
+html.dark {
+  color-scheme: dark;
+  /* 蓝色稍微提亮一点，避免在深色卡片上对比度不足 */
+  --zhihu-blue: 56 154 255;
+  --zhihu-blue-hover: 90 175 255;
+  --zhihu-blue-active: 30 130 230;
+  /* blue-light/soft 在浅色下是淡蓝背景，在暗色下变成蓝色叠加在深底上 */
+  --zhihu-blue-light: 30 60 92;
+  --zhihu-blue-soft: 24 50 78;
+  --zhihu-ink: 235 235 240;
+  --zhihu-gray: 145 152 168;
+  --zhihu-gray-2: 175 182 198;
+  --zhihu-gray-3: 130 138 152;
+  --zhihu-border: 56 56 60;
+  --zhihu-border-light: 44 44 48;
+  --zhihu-bg: 22 22 26;
+  --zhihu-bg-soft: 30 30 34;
+  --zhihu-card: 32 32 36;
+  --zhihu-page: 22 22 26;
+  --body-text: 235 235 240;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  color: rgb(var(--body-text));
+  -webkit-font-smoothing: antialiased;
+  background: var(--body-bg);
+}
+
+/* 设置窗口顶栏可拖动；按钮/输入框区域排除 */
+.titlebar-drag {
+  -webkit-app-region: drag;
+}
+.titlebar-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* 滚动条：知乎风格的细灰条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(133, 144, 166, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(133, 144, 166, 0.5);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 气泡内对话流——平时隐藏滚动条，hover/active 时再显现，避免在窄气泡里抢眼。
+   宽度保持 6px，比全局 8px 略细一点，配合气泡的手绘味。 */
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+  transition: background 0.15s ease;
+}
+.chat-scroll:hover::-webkit-scrollbar-thumb,
+.chat-scroll:focus-within::-webkit-scrollbar-thumb,
+.chat-scroll:active::-webkit-scrollbar-thumb {
+  background: rgba(133, 144, 166, 0.4);
+}
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(133, 144, 166, 0.6);
+}
+
+/* 知乎风格滑块 —— 槽与拇指都换成 var() 变量，跟随主题 */
+.zhihu-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    rgb(var(--zhihu-blue)) var(--slider-fill, 50%),
+    rgb(var(--zhihu-border)) var(--slider-fill, 50%)
+  );
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+.zhihu-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgb(var(--zhihu-card));
+  border: 2px solid rgb(var(--zhihu-blue));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.zhihu-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 132, 255, 0.3);
+}
+.zhihu-slider::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+}
+
+/* 通用按钮基础态 */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-zhihu-blue px-4 py-2 text-sm font-medium text-white transition-colors;
+    @apply hover:bg-zhihu-blue-hover active:bg-zhihu-blue-active;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-zhihu-border bg-zhihu-card px-4 py-2 text-sm font-medium text-zhihu-ink transition-colors;
+    @apply hover:bg-zhihu-blue-light hover:border-zhihu-blue hover:text-zhihu-blue;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .input-text {
+    @apply block w-full rounded-lg border border-zhihu-border bg-zhihu-card px-3 py-2 text-sm text-zhihu-ink transition-colors;
+    @apply placeholder:text-zhihu-gray;
+    @apply focus:border-zhihu-blue focus:outline-none focus:ring-2 focus:ring-zhihu-blue/20;
+  }
+  .label-field {
+    @apply mb-1.5 block text-xs font-medium text-zhihu-gray-2;
+  }
+}

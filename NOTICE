@@ -1,0 +1,61 @@
+# NOTICE
+
+「你好，小刘（社区版）」/ Hiliu Community Edition
+
+## 关于「刘看山」形象
+
+本项目的桌宠形象——名字、角色设定、立绘逐帧素材、品牌主色——均取自
+**知乎（北京智者天下科技有限公司）** 的吉祥物「刘看山」。
+
+「刘看山」是知乎的注册商标与原创角色 IP。本项目以社区好意致敬这一形象，
+但**绝不主张对该形象的任何权利**。具体来说：
+
+- `设定/` 目录下的逐帧 PNG 立绘、`resources/` 下打包入安装器的角色图像、
+  以及由 `scripts/build-sprites.py` 生成的 sprite WebP 表，**著作权归知乎
+  所有**。
+- 知乎品牌色 token（`zhihu-blue` `#0084FF` 等，定义在 `tailwind.config.js`）
+  是出于设计一致性保留的视觉约定，**不构成对知乎商标的使用许可**。
+- 项目名 `Hiliu` / 中文「你好，小刘」并非知乎注册商标，但项目主体仍致敬
+  其原作，并以「社区版」后缀与知乎可能的官方版本明确区分。
+
+如果你来自知乎，希望对本项目的形象/品牌使用提出关切或要求下架，请通过
+GitHub Issue 或邮件联系维护者，我们会在合理时间内配合处理。
+
+## 关于源代码
+
+本仓库的源代码（`src/` `scripts/` 等）、构建配置、文档以 MIT 协议开放，
+见 `LICENSE` 文件。任何二次开发者可以自由复用代码逻辑——前提是**不复用
+角色立绘资源**，或在使用立绘前自行获得知乎授权。
+
+## 关于社区版与官方版的关系
+
+本项目最初是一个商业产品「你好，小刘」的内部实现。社区版与原项目的区别：
+
+- 移除了所有依赖**知乎私有 API**的功能模块（热榜抓取、知乎直答接入、
+  知乎账号 OAuth 登录等），仅保留通用 AI 桌宠骨架与立绘动画系统。
+- 重命名为 `Hiliu Community`，应用 ID 切换为 `chat.hiliu.community`，与
+  原项目互不冲突。
+- 不再内置任何与知乎服务通信的网络请求。所有 LLM 调用走用户自配的
+  Anthropic / OpenAI / Gemini 第三方账号。
+
+社区版并非知乎官方发布，知乎对本项目的代码质量与运行行为不承担任何责任。
+
+## 第三方依赖
+
+本项目使用了以下第三方依赖，遵循各自的开源协议。详见 `package.json` 与
+`pnpm-lock.yaml`。
+
+主要依赖：
+
+- Electron — MIT
+- React — MIT
+- TailwindCSS — MIT
+- electron-vite — MIT
+- electron-store — MIT
+- @anthropic-ai/sdk — MIT
+- openai — Apache-2.0
+- @modelcontextprotocol/sdk — MIT
+- Cheerio / JSDOM / @mozilla/readability — Apache-2.0 / MIT
+
+字体「康康体」等设定/中可能附带的字形资源不在 MIT 协议范围内，使用前请
+自行核查授权。
