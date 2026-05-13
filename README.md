@@ -43,6 +43,17 @@ pnpm package    # 打包 NSIS 安装器
 
 代码结构与设计约定见 `CLAUDE.md`。
 
+### 关键目录
+
+| 目录 | 说明 |
+|---|---|
+| [`src/main/`](./src/main) | Electron 主进程 |
+| [`src/main/llm/`](./src/main/llm) | LLM 抽象层（协议翻译、流式、工具循环） |
+| [`src/renderer/src/`](./src/renderer/src) | React 渲染器（界面、动画、路由） |
+| [`src/shared/`](./src/shared) | 三进程共享类型与枚举 |
+| [`src/preload/`](./src/preload) | contextBridge 桥接层 |
+| [`resources/`](./resources) | 图标、立绘、内置二进制 |
+
 ## 形象与版权
 
 「刘看山」是知乎（北京智者天下科技有限公司）的注册角色 IP。本项目以社区好意致敬，不主张对该形象的任何权利。请阅读 `NOTICE` 文件了解形象部分的使用边界。
